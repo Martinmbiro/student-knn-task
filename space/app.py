@@ -1,4 +1,4 @@
-
+import spaces
 import gradio as gr
 import numpy as np
 from model_loader import model
