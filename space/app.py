@@ -5,6 +5,7 @@ from model_loader import model
 
 # function to run model
 # takes inputs from UI, returns result
+@spaces.GPU # to prevent Spaces Hardware Error
 def predict(hours, att, assgn, exam):
   inputs = np.asarray([[hours, att, assgn, exam]])
   if (None in inputs):
