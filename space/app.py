@@ -110,7 +110,7 @@ with gr.Blocks() as demo:
   )
 
   submit.click(
-      fn=predict,
+      fn=on_click,
       inputs=[hours, att, assgn, exam],
       outputs=pred_mssg
   )
