@@ -1,6 +1,7 @@
 import spaces
 import gradio as gr
 import numpy as np
+import sklearn
 from model_loader import model
 
 def on_click(hours: float | None, att: float | None, assgn: float | None, exam: float | None) -> str | None:
