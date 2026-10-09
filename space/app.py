@@ -3,21 +3,53 @@ import gradio as gr
 import numpy as np
 from model_loader import model
 
-# function to run model
-# takes inputs from UI, returns result
-@spaces.GPU # to prevent Spaces Hardware Error
-def predict(hours, att, assgn, exam):
+def on_click(hours: float | None, att: float | None, assgn: float | None, exam: float | None) -> str | None:
+  """Handles the UI click event, validating inputs before generating a performance prediction.
+
+    Parameters
+    ----------
+    hours : float or None
+        Number of study hours.
+    att : float or None
+        Attendance percentage or score.
+    assgn : float or None
+        Assignment score.
+    exam : float or None
+        Exam score.
+
+    Returns
+    -------
+    str or None
+        A formatted prediction string ('PASS' or 'FAIL') if all inputs are provided,
+        or None if validation fails (a Gradio info notification is displayed).
+  """
   inputs = np.asarray([[hours, att, assgn, exam]])
   if (None in inputs):
     gr.Info('Please fill all student details', duration=4)
     return
   else:
-    # make prediction
-    pred = 'PASS' if model.predict(inputs).item() == 1 else 'FAIL'
+    return predict(model, inputs)
 
-    # return statement with prediction
-    return f'The student is likely to {pred}'
+@spaces.GPU # required for HF Spaces ZeroGPU 
+def predict(model: sklearn.model_selection.GridSearchCV, inputs: np.ndarray) -> str:
+  """Executes the trained model to predict whether a student will pass or fail.
 
+    Parameters
+    ----------
+    model : sklearn.model_selection.GridSearchCV
+        A fitted scikit-learn estimator or GridSearchCV object used for inference.
+    inputs : np.ndarray
+        A 2D NumPy array of shape (1, 4) containing numerical feature values.
+
+    Returns
+    -------
+    str
+        A formatted string stating whether the student is likely to PASS or FAIL.
+  """
+  # make prediction
+  pred = 'PASS' if model.predict(inputs).item() == 1 else 'FAIL'
+  # return statement with prediction
+  return f'The student is likely to {pred}'
 # custom CSS
 custom_css = """
   #txt {
