@@ -23,7 +23,7 @@ Contains the excel dataset used for model training. Please note that this is jus
 ##### 6. `.github/workflows/sync-to-hf.yaml` 📄
 + The YAML file defines the [GitHub Actions](https://docs.github.com/en/actions) workflow that automatically syncs the contents of the `space` directory to my Hugging Face [Space](https://huggingface.co/spaces/martinmbiro/student-knn-task) whenever changes are pushed to the main branch or the workflow is triggered manually.
 + Find Hugging Face Hub reference for [GitHub Actions](https://docs.github.com/en/actions) linked [here](https://huggingface.co/docs/hub/main/en/repositories-github-actions)
-##### 7. [`00. scikit-learn question - solution.ipynb`](https://github.com/Martinmbiro/student-knn-task/blob/main/00_scikit_learn_question_solution_github.ipynb)
+##### 7. [`00_scikit_learn_question_solution_github.ipynb`](https://github.com/Martinmbiro/student-knn-task/blob/main/00_scikit_learn_question_solution_github.ipynb)
 Find the annotated code and plots in this Jupyter Notebook. Feel free to open and explore in Google Colab
 
 ## Tools 🛠️
